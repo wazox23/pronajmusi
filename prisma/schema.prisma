@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"] 
+}
+
+
+model User {
+  id      String      @id
+  email   String   @unique
+  name    String?
+}
+
+model Ads {
+  id                      String      @id
+  title                   String
+  location                String
+  category                String
+  email                   String
+  phone                   String
+  description             String      @db.Text
+  specialInstructions     String?     @db.Text
+  dateFrom                BigInt?
+  dateTo                  BigInt?
+  price                   Int?
+  period                  String?
+  type                    String
+  userID                  String
+  created                 BigInt?
+  deleteAfter             BigInt?
+  img                     String?     @db.Text
+  backgroundOption        String?
+}
